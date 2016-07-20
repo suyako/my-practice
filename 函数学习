@@ -1,0 +1,47 @@
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+
+int add(int &x, int &y)
+{
+	int res = x + y;
+	return res;
+}
+int minu(int &x,int &y)
+{
+	int res = x - y;
+	return res;
+}
+int mul(int &x, int &y)
+{
+	int res = x * y;
+	return res;
+}
+int divid(int &x, int &y)
+{
+	if (y != 0)
+		return x / y;
+	else throw runtime_error("y must not equal to zero");
+}
+int main()
+{
+	decltype(add) *p1 = add, *p2 = minu, *p3 = mul, *p4 = divid;
+	vector<int (*)(int&,int&)> vec = { p1,p2,p3,p4 };
+	string func[4] = { "add","minu","mul","divid" };
+	int i, j;
+	size_t t = 0;
+	cout << "please enter two numbers: " << endl;
+	cin >> i >> j;
+	auto b = vec.cbegin(), e = vec.cend();
+	while (b!=e)
+	{
+		int result = (*b)(i, j);
+		cout << i<<" "<<func[t]<<" "<<j<<" equals to "<<result << endl;
+		++b;
+		++t;
+	}
+	return 0;
+}
