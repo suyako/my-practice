@@ -1,0 +1,47 @@
+#include "stdafx.h"
+#include<vector>
+#include<list>
+#include<forward_list>
+#include<string>
+#include<iostream>
+using namespace std;
+
+
+string substitude(string &s, string oldval, string newval)
+{
+	size_t pos = 0;
+	while ((pos=s.find(oldval,pos))!=string::npos)
+	{
+		s.replace(pos, oldval.size(), newval);
+		pos=pos+newval.size();
+	}
+	return s;
+}
+int main()
+{
+	string shakespeare("2 b or not 2 b, it's a question.");
+	string s,vocabulary,end_it("end_the_circulation");
+	vector<string> oldvocabulary, newvocabulary;
+	cout << "please enter the oldvocabulary(and if you want to break, just input end_the_circulation): ";
+	while (cin >> vocabulary)
+	{
+		if (vocabulary != end_it)
+			oldvocabulary.push_back(vocabulary);
+		else break;
+	}
+	cout << endl;
+	cout << "please enter the correspondent newvocabulary(and if you want to break, just input end_the_circulation): ";
+	while (cin >> vocabulary)
+	{
+		if (vocabulary != end_it)
+ 			newvocabulary.push_back(vocabulary);
+		else break;
+	}
+	cout << endl;
+	for (size_t i = 0; i != oldvocabulary.size(); i++)
+	{
+		s = substitude(shakespeare, oldvocabulary[i], newvocabulary[i]);
+	}
+	cout << s << endl;
+    return 0;
+}
